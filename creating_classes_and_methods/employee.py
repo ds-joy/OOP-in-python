@@ -10,14 +10,15 @@ class Employee:
 
     # class method
     def printEmployeeDetails(self):
-        
+
         print('Full Name: {} {}'.format(self.firstName, self.lastName))
         print('Email: {}'.format(self.email))
         print('Salary: {}'.format(self.salary))
-
     
 
 # instance object
-
 emp1 = Employee("Debasish", "Sarker", 40000)
 emp1.printEmployeeDetails()
+
+emp2 = Employee("John", "Cena", 500000)
+emp2.printEmployeeDetails()
