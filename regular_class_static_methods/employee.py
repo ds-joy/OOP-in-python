@@ -26,6 +26,14 @@ class Employee:
     def setRaiseAmount(cls, amount):
         cls.raiseAmount = amount
 
+    @staticmethod
+    def is_week_day(date):
+        if date.weekday() == 5 or date.weekday() == 6:
+            return "week day"
+        return "Not week day"
+
+
+
 
     def raiseSalary(self):
         self.salary = self.salary * self.raiseSalary
@@ -57,6 +65,12 @@ emp2.printEmployeeInfo()
 empStr = "Van-Dijk-100000"
 emp3 = Employee.fromString(empStr)
 emp3.printEmployeeInfo()
+
+#using the static method
+import datetime
+date = datetime.date(2020, 8, 21)
+
+print(Employee.is_week_day(date))
 
 print(Employee.raiseAmount)
 print(emp1.raiseAmount)
