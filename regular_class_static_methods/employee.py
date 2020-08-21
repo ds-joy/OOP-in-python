@@ -4,7 +4,7 @@ class Employee:
     # class veriable
     numOfEmployees = 0
     # can be a class and instance veriable
-    salaryRaise = 1.04
+    raiseAmount = 1.04
     
     # constractor method
     def __init__(self, firstName, lastName, salary):
@@ -15,16 +15,26 @@ class Employee:
         self.salary = salary
         Employee.numOfEmployees += 1
         print('Number Of employees: {} \n'.format(Employee.numOfEmployees))
+    
+    @classmethod
+    def fromString(cls, empStr):
+        firstName, lastName, salary = empStr.split("-")
+        return cls(firstName, lastName, salary)
+
+    # this is a class method this takes class as an argument not the instance
+    @classmethod
+    def setRaiseAmount(cls, amount):
+        cls.raiseAmount = amount
+
 
     def raiseSalary(self):
-        self.salary = self.salary * self.salaryRaise
-
+        self.salary = self.salary * self.raiseSalary
 
     def printEmployeeInfo(self):
         self.printFullName()
         self.printEmail()
         self.printSalary()
-    
+
     def printFullName(self):
         print('Full Name: {} {}'.format(self.firstName, self.lastName))
     
@@ -43,20 +53,27 @@ emp1.printEmployeeInfo()
 emp2 = Employee("John", "Cena", 100000)
 emp2.printEmployeeInfo()
 
-# here salary raise will be used as an class veriable
-emp1.raiseSalary()
-emp1.printEmployeeInfo()
+# creating an employee from string
+empStr = "Van-Dijk-100000"
+emp3 = Employee.fromString(empStr)
+emp3.printEmployeeInfo()
 
-# here salaryRaise becomes an instance veriable
-emp2.salaryRaise = 1.05
-emp2.raiseSalary()
-emp2.printEmployeeInfo()
+print(Employee.raiseAmount)
+print(emp1.raiseAmount)
+print(emp2.raiseAmount)
 
-# at first the emp1 dictionary doesn't contain salaryRaise veriable because it is a class veriable at this point
-print(emp1.__dict__)
+print('After changhing the raise amount using emp1:')
+emp2.raiseAmount = 1.05
 
-# after we implicitly call the salaryRAise veriable it becomes an instance veriable and gets added to the emp1 dictionary
-emp1.salaryRaise = 1.05
-print(emp1.__dict__)
+print(Employee.raiseAmount)
+print(emp1.raiseAmount)
+print(emp2.raiseAmount)
+
+print('After changhing the raise amount using class method:')
+Employee.setRaiseAmount(1.07)
+
+print(Employee.raiseAmount)
+print(emp1.raiseAmount)
+print(emp2.raiseAmount)
 
 
